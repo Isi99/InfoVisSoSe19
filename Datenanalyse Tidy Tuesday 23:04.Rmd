@@ -1,0 +1,45 @@
+---
+title: "Datenanalyse Tidy Tuesday 23/04"
+author: "Isabelle Wanders"
+date: "23.04.2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+# 1. Tidy-Tuesday Übung 2
+## Analyse/Visualisierung von Frauen in der Forschung
+
+```{r Daten laden, message=FALSE, warning=FALSE}
+women_research <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-04-16/women_research.csv")
+```
+# 2. Deskriptive Analyse
+
+```{r 2. Abgabe, message=FALSE, warning=FALSE}
+women_research %>%
+  ggplot(aes(x=country, y=percent_women, colour = field, label =paste0(percent_women), "%")) +
+  geom_point( size=2, alpha = 0.6) + 
+  scale_y_continuous(breaks = seq(0,0.8, by=0.1)) +  
+  coord_flip() +
+  theme_grey () + 
+  scale_color_viridis_d(option="B") + 
+  labs(title = "Women are underrepresented in academic publishing",
+subtitle = "Women among researchers with papers published 2011-2015 
+       as % of total by field of study",
+       x = "Country",
+       y = "Women, as % of total published authors",
+       colour = "Field of study",
+       caption = "Sources: 'Gender in the Global Research Landscape by Elsevier; The Economist ") + 
+  geom_hline(yintercept = .50, linetype="dashed", color = "red", size=2)
+
+```
+
+#### Diese Visualisierung zeigt, über ein Punktdiagramm, den Anteil der Frauen in der Forschung mit veröffentlichten Arbeiten 2011-2015 in % der Gesamtzahl sortiert nach Studienrichtung und aufgeschlüsselt nach 11 Ländern. Die Differenzierung nach Ländern erleichtert es, einen Vergleich zwischen den Ländern herzustellen. In Japan gibt es untern den insgesamt veröffentlichten Autoren am wenigsten Frauen, mit maximal 25%. In Brasilien und Portugal liegt der höchste Anteil an Frauen unter den Autoren mit 57%, während die restlichen Länder im unteren Mittelbereich bei 25-27% liegen. Die Sortierung nach Studienfächern zeigt, dass inbesondere Frauen mit den Studienfächern im Bereich "Health Science" deutlich den größten Anteil der Frauen unter den veröffentlichten Autoren bilden, während Erfinderinnen und Frauen aus der Studienrichtung "Computer science, maths" den geringsten Prozentsatz bilden. Insgesamt zeigt die Visualisierung, dass Frauen im akademischen Verlagswesen stark unterpräsentiert sind. Dies soll die rote Grenze bei 50% visuell verdeutlichen. Nur in Brasilien und Portugal wird diese Grenze überschritten. 
