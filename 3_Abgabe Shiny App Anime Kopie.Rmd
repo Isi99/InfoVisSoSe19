@@ -1,0 +1,14 @@
+---
+title: "Abgabe Tidy Tuesday 3 Shiny App Anime"
+author: "Isabelle Wanders"
+date: "07.05.2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+ https://isi99.shinyapps.io/anime_2/
+ 

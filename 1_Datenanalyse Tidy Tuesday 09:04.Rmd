@@ -1,0 +1,46 @@
+---
+title: "Datenanalyse Tidy Tuesday 09/04"
+author: "Isabelle Wanders"
+date: "08.04.2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+# 1. Tidy-Tuesday Übung 1
+## Analyse/Visualisierung des Fahrradverkehrs in Seattle am 01/01/2014
+
+```{r datenladen, message=FALSE, warning=FALSE}
+bike_traffic <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-04-02/bike_traffic.csv")
+
+```
+
+
+```{r 1 Abgabe, message=FALSE, warning=FALSE}
+
+bike_traffic %>%
+  ggplot() +
+  aes(x = direction, y = bike_count) +
+  geom_boxplot() + 
+  coord_flip() + 
+  labs(title = "Verteilung der Fahrrad-Fahrer nach Himmelsrichtungen am 01/01/2014",
+       subtitle = "Boxplot der Anzahl von Fahrrad-Fahrern nach Himmelsrichtungen",
+       x = "Himmelsrichtung",
+       y = "Anzahl Fahrrad-Fahrer") +
+  theme_grey()
+
+```
+
+
+#### Diese Visualisierung zeigt über einen Boxplot die Verteilung der Fahrrad-Fahrer nach den Himmelsrichtungen North, South, East und West am 01. Januar 2014. Die Wenigsten sind Richtung Westen gefahren. Die Himmelsrichtungen Norden und Süden sind ungefähr gleich stark und am meisten befahren.  Es gibt jedoch 2 Ausnahmen, bei der 4000 und 8000 Fahrradfahrer Richtung Süden gefahren sind. Aufgrund dieser zwei starken Aureißer ist die Visualisierung ungeeignet, da sie die Skala verzerren. 
+
+
